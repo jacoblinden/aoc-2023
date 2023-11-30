@@ -1,19 +1,92 @@
-## Day 22 solution template
+# Typescript with [Bun runtime](https://bun.sh/)
 
-This shows the basics of the setup needed to participate in the Cygnified AoC with your solution for a given day (in this case day 22 because we are in the `day22` directory). **The directory structure is important.**
+Supported on macOS, Linux, and WSL
 
-The setup must include a `Dockerfile` that includes the solution source code. Your `Dockerfile` must include a `COPY` statement that copies `input.txt` (and possibly other files) from the root of `day02` (in this case) into your image. That is, we will use your individual `puzzle input` provided by Advent of Code when analysing your solution.
+[Should have Windows support before Dec 1.](https://twitter.com/bunjavascript/status/1717497691893285232)
 
-From all this magic setup, the Cygnified AoC-engine can create a valid image and you're in the game (and that's awesome).
+Bun also has a built-in package manager and a testrunner (jest-like).
 
-Shell scripting is fun and all, but we have provided examples for many different languages to get you up and running with your favourite weapons, have a look [here](../examples)
+## Setup
 
-### How to build
-`docker build -t aoc22 .`
+Install bun
 
-### How to run
-The environment variable `part` specifies which part of the solution to run.
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
 
-`docker run -e part=part1 aoc22`
+Install all dependencies - optional.
 
-**As this is just a template**, all that `part1` and `part2` does is to print the first and last line of `input.txt`, respectively. For a more realistic example, have a look [here](../examples).
+*(there are only two dev deps to install and they are optional to run the code.)*
+
+```sh
+bun install
+```
+
+## Run the code
+
+```sh
+bun part1
+
+bun part2
+```
+
+
+Run the test suite
+
+```sh
+bun test
+```
+
+all scripts can be found in package.json
+
+
+## Lint and formatting
+
+
+### Linting
+To lint and format the code, I have installed [Biome.js](https://biomejs.dev/).
+
+Biome is installed as a dev dependency, remove it if you don't want it.
+
+To lint, run the linting scripts
+```
+bun lint 
+
+or
+
+bun lint:fix
+```
+
+
+### Formatting
+
+If you want formatting through vscode you'll need to move the `biome.js` file to the repo root folder. Then add the following to a `.vscode/settings.json` file in the repo with the following content. This will add biome as default formatter for ts and json files in the project. It will also format the code on save.
+
+```json
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": true,
+    "source.organizeImports.biome": true
+  }
+}
+```
+
+## Docker
+
+Build
+```sh
+docker build . -t day01
+```
+
+Run 
+```sh
+docker run -e part=part1 day01
+docker run -e part=part2 day01
+```
+
