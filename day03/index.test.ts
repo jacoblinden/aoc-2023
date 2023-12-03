@@ -3,9 +3,9 @@ import { day} from './index.ts'
 
 describe('Bun Tests Examples', () => {
   test('Part 1', () => {
-    expect(day.part1()).toBe(1337)
+    expect(day.part1()).toBe(4361)
   })
-  test('Part 2', () => {
-    expect(day.part2()).toBe(42)
-  })
+   test('Part 2', () => {
+    expect(day.part2()).toBe(467835)
+  }) 
 })
